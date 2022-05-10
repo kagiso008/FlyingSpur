@@ -29,7 +29,7 @@
           height: 100px;
           font-family: 'RocknRoll One', sans-serif;
           font-size: 40px;
-          bottom: 100px;
+          bottom: 20px;
           border-radius: 20px;
           background-color: darkblue;
           color: white;
@@ -38,7 +38,7 @@
       }
       #instructions{
           position:absolute;
-          bottom: 250px;
+          top: 150px;
           font-family: 'RocknRoll One', sans-serif;
           font-size: 30px;
           color: darkblue;
@@ -53,9 +53,9 @@
 
       #header{
           position:absolute;
-          bottom: 250px;
+          bottom: 350px;
           font-family: 'RocknRoll One', sans-serif;
-          font-size: 100px;
+          font-size: 50px;
           color: darkblue;
           width: 300px;
           left: 50%;
@@ -131,7 +131,7 @@
     <p id="gameover">Game over</p>
     <button id="playBtn">PLAY</button>
     <script type="module">
-        import { Game } from './Game.js';
+        import { Game } from './start/lecture5_6/Game.js';
 
         document.addEventListener("DOMContentLoaded", () => {
             const game = new Game();
