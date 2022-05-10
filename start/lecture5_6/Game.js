@@ -1,6 +1,6 @@
 import * as THREE from '../../libs/three137/three.module.js';
 import { RGBELoader } from '../../libs/three137/RGBELoader.js';
-import { LoadingBar } from '../../libs/LoadingBar.js';
+//import { LoadingBar } from '../../libs/LoadingBar.js';
 import { Plane } from './Plane.js';
 import { Obstacles } from './Obstacles.js';
 import { SFX } from './SFX.js';
