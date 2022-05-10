@@ -1,89 +1,126 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Nik Lever, Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <title>The Beginners Guide to 3D Web Game Development with ThreeJS</title> 
 
-    <!-- Bootstrap core CSS -->
-        <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <!-- Favicons -->
-      <link rel="apple-touch-icon" sizes="180x180" href="css/favicon/apple-touch-icon.png">
-      <link rel="icon" type="image/png" sizes="32x32" href="css/favicon/favicon-32x32.png">
-      <link rel="icon" type="image/png" sizes="16x16" href="css/favicon/favicon-16x16.png">
-      <link rel="manifest" href="css/favicon/site.webmanifest">
-      <link rel="mask-icon" href="css/favicon/safari-pinned-tab.svg" color="#5bbad5">
-      <meta name="msapplication-TileColor" content="#da532c">
-      <meta name="theme-color" content="#ffffff">
+<head>
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!--favicon -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../css/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../css/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="../../css/favicon/site.webmanifest">
+  <link rel="mask-icon" href="../../css/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
+
+  <style>
+      body{
+          margin: 0;
+          font-family: 'RocknRoll One', sans-serif;
+      }  
+      #playBtn{
+          position: absolute;
+          width: 180px;
+          height: 100px;
+          font-family: 'RocknRoll One', sans-serif;
+          font-size: 40px;
+          bottom: 100px;
+          border-radius: 20px;
+          background-color: darkblue;
+          color: white;
+          left: 50%;
+          transform: translateX(-50%);
       }
-      
-      @media screen and (max-width: 750px) {
-        iframe {
-          max-width: 100% !important;
-          width: auto !important;
-          height: auto !important;
-        }
+      #instructions{
+          position:absolute;
+          bottom: 250px;
+          font-family: 'RocknRoll One', sans-serif;
+          font-size: 30px;
+          color: darkblue;
+          width: 300px;
+          left: 50%;
+          transform: translateX(-50%);
+          border-radius: 20px;
+          padding: 30px;
+          background-color: rgba(255, 255, 255, 0.5);
+          text-align: center;
       }
-    </style>
-    <!-- Custom styles for this template -->
-    <link href="css/threejs-games.css" rel="stylesheet">
-  </head>
-  <body class="text-center">
-      <script src="https://kit.fontawesome.com/86f3d02ba1.js" crossorigin="anonymous"></script>
-<header class="masthead mb-auto">
-    <div class="inner">
-      <h3 class="masthead-brand"><img src="css/favicon/favicon-32x32.png" />ThreeJS Game Dev</h3>
-      <nav class="nav nav-masthead justify-content-center">
-        <a class="nav-link active" href="#">Course</a>
-        <a class="nav-link" href="https://threejs.org">ThreeJS</a>
-      </nav>
+      #gameover{
+          display: none;
+          position:absolute;
+          bottom: 250px;
+          font-family: 'RocknRoll One', sans-serif;
+          font-size: 50px;
+          color: darkblue;
+          width: 300px;
+          left: 50%;
+          transform: translateX(-50%);
+          border-radius: 20px;
+          padding: 30px;
+          background-color: rgba(255, 255, 255, 0.5);
+          text-align: center;
+      }
+      #info{
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          font-family: 'RocknRoll One', sans-serif;
+          font-size: 50px;
+      }
+      #info img{
+          padding-top: 20px;
+      }
+      #life{
+        position: absolute;
+        left: 20px;
+      }
+      #score-panel{
+        position: absolute;
+        top: 0;
+        right: 20px;
+        float: right;
+      }
+      #lives{
+          display: inline;
+          position: relative;
+          top: -15px;
+      }
+      #score{
+          display: inline;
+          position: relative;
+          top: -15px;
+      }
+  </style>
+
+  <title>Lecture 5.6</title>
+</head>
+
+<body>
+    <p id="instructions">Collect stars. <br>Avoid bombs. <br>Spacebar, mousedown or touch to climb</p>
+    <div id="info">
+        <div id="life">
+            <img src="../../assets/plane/plane-icon.png" /><div id="lives">3</div>
+        </div>
+        <div id="score-panel">
+            <div id="score">0</div><img src="../../assets/plane/star-icon.png" />
+        </div>
     </div>
-  </header>
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-  
+    <p id="gameover">Game over</p>
+    <button id="playBtn">PLAY</button>
+    <script type="module">
+        import { Game } from './Game.js';
 
-  <main role="main" class="inner cover">
-    <h1 class="cover-heading">&nbsp;</h1>
-    <p class="lead"><br><br>This page features examples from ThreeJS Game Development course</p>
-  </main>
-        <section>
-      <h3>The Beginners Guide to 3D Web Game Development with ThreeJS</h3>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/wOc-nT-6uik" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      <br><br><h5><a href="https://github.com/NikLever/threejs-games-course">Source code</a></h5>
-      
-      <a class="btn btn-primary" href="https://www.udemy.com/course/beginners-3d-web-game-development-with-threejs/?referralCode=B22E3315F32B1A1C7EEF" role="button">Get Course</a><br><br>
-      
-      <h5>Course content links</h5>
-       <ul>
-          <li>lecture5_6&emsp; <a href="start/lecture5_6">start</a>&emsp; <a href="complete/lecture5_6">complete</a></li>
-          <li>&nbsp;</li>
-        </ul> 
-  </section> 
-       
-         
-        <br>
-</div>
-<footer class="mastfoot mt-auto">
-    <div class="inner">
-        <p><a href="mailto:nik.j.lever@gmail.com"><i class="fa fa-envelope"></i> Nik Lever</a>&emsp;<a href="https://twitter.com/NikLever"><i class="fa fa-twitter"></i> @NikLever</a>&emsp;<a href="https://www.facebook.com/groups/nikthreejs"><i class="fa fa-facebook-official"></i> </p>
-    </div>
-  </footer>
+        document.addEventListener("DOMContentLoaded", () => {
+            const game = new Game();
+            window.game = game;  
+        });
+    </script>
 </body>
+
 </html>
