@@ -25,7 +25,7 @@
       }  
       #playBtn{
           position: absolute;
-          width: 180px;
+          width: 200px;
           height: 100px;
           font-family: 'RocknRoll One', sans-serif;
           font-size: 40px;
@@ -36,9 +36,38 @@
           left: 50%;
           transform: translateX(-50%);
       }
+
+      #enterNameBtn{
+          position: absolute;
+          width: 70px;
+          height: 40px;
+          font-family: 'RocknRoll One', sans-serif;
+          font-size: 10px;
+          bottom: 5px;
+          border-radius: 5px;
+          background-color: darkblue;
+          color: white;
+          left: 50%;
+          transform: translateX(-50%);
+      }
+
+      #leaderboardBtn{
+          position: absolute;
+          width: 200px;
+          height: 80px;
+          font-family: 'RocknRoll One', sans-serif;
+          font-size: 20px;
+          top: 280px;
+          border-radius: 20px;
+          background-color: darkblue;
+          color: white;
+          left: 50%;
+          transform: translateX(-50%);
+      }
+
       #instructions{
           position:absolute;
-          top: 20px;
+          top: 1px;
           font-family: 'RocknRoll One', sans-serif;
           font-size: 30px;
           color: darkblue;
@@ -54,7 +83,7 @@
       #gameover{
           display: none;
           position:absolute;
-          bottom: 250px;
+          top: 50px;
           font-family: 'RocknRoll One', sans-serif;
           font-size: 50px;
           color: darkblue;
@@ -66,6 +95,7 @@
           background-color: rgba(255, 255, 255, 0.5);
           text-align: center;
       }
+
       #info{
           position: absolute;
           top: 0;
@@ -97,6 +127,12 @@
           position: relative;
           top: -15px;
       }
+      
+      #highScores{border:1px solid green;
+          display:block;
+          overflow: auto;
+      }
+      
   </style>
 
   <title>Flying Spur</title>
@@ -106,13 +142,21 @@
     <p id="instructions"><span style="font-size: 42px;">FLYING SPUR</span> <br>Collect stars. <br>Avoid bombs. <br>Spacebar, mousedown or touch to climb</p>
     <div id="info">
         <div id="life">
-            <img src="../../assets/plane/plane-icon.png" /><div id="lives">3</div>
+            <img src="../../assets/plane/plane-icon.png" / id="livesImage"><div id="lives">3</div>
         </div>
         <div id="score-panel">
-            <div id="score">0</div><img src="../../assets/plane/star-icon.png" />
+            <div id="score">0</div><img src="../../assets/plane/star-icon.png" id="scoreImage"/>
         </div>
     </div>
-    <p id="gameover">Game over</p>
+    <p id="gameover">Game over<br>
+        <span class="myScoreText"style="font-size: 20px">Score : </span>
+        <span id="myScore"style="font-size: 20px">0</span><br>
+        <textarea placeholder="Enter your name",font-size="2 " class="name" ></textarea><br>
+        <button id="enterNameBtn">Enter</button>
+        <a href="/highscores.html">
+            <button id="leaderboardBtn">LEADERBOARD</button>
+        </a>     
+    </p>
     <button id="playBtn">PLAY</button>
     <script type="module">
         import { Game } from './start/lecture5_6/Game.js';
@@ -123,5 +167,4 @@
         });
     </script>
 </body>
-
 </html>
