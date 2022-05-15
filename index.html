@@ -51,7 +51,7 @@
           transform: translateX(-50%);
       }
 
-      #leaderboardBtn{
+      #showLeaderboard{
           position: absolute;
           width: 200px;
           height: 80px;
@@ -151,11 +151,8 @@
     <p id="gameover">Game over<br>
         <span class="myScoreText"style="font-size: 20px">Score : </span>
         <span id="myScore"style="font-size: 20px">0</span><br>
-        <textarea placeholder="Enter your name",font-size="2 " class="name" ></textarea><br>
-        <button id="enterNameBtn">Enter</button>
-        <a href="/highscores.html">
-            <button id="leaderboardBtn">LEADERBOARD</button>
-        </a>     
+        <button onclick="myFunction()" id="showLeaderboard">SHOW LEADERBOARD</button>
+        <div><ol id="highScores"></ol></div>
     </p>
     <button id="playBtn">PLAY</button>
     <script type="module">
@@ -165,6 +162,17 @@
             const game = new Game();
             window.game = game;  
         });
+    </script>
+    <script>
+        const targetDiv = document.getElementById("showScores");
+        const btn = document.getElementById("showLeaderboard");
+        btn.onclick = function () {
+        if (targetDiv.style.display !== "none") {
+            targetDiv.style.display = "none";
+        } else {
+            targetDiv.style.display = "block";
+        }
+        };
     </script>
 </body>
 </html>
