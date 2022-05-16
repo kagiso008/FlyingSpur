@@ -19,10 +19,7 @@
   <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
 
   <style>
-      body{
-          margin: 0;
-          font-family: 'RocknRoll One', sans-serif;
-      }  
+      
       #playBtn{
           position: absolute;
           width: 200px;
@@ -31,20 +28,6 @@
           font-size: 40px;
           bottom: 20px;
           border-radius: 20px;
-          background-color: darkblue;
-          color: white;
-          left: 50%;
-          transform: translateX(-50%);
-      }
-
-      #enterNameBtn{
-          position: absolute;
-          width: 70px;
-          height: 40px;
-          font-family: 'RocknRoll One', sans-serif;
-          font-size: 10px;
-          bottom: 5px;
-          border-radius: 5px;
           background-color: darkblue;
           color: white;
           left: 50%;
@@ -104,24 +87,29 @@
           font-family: 'RocknRoll One', sans-serif;
           font-size: 50px;
       }
+      
       #info img{
           padding-top: 20px;
       }
+      
       #life{
         position: absolute;
         left: 20px;
       }
+      
       #score-panel{
         position: absolute;
         top: 0;
         right: 20px;
         float: right;
       }
+      
       #lives{
           display: inline;
           position: relative;
           top: -15px;
       }
+      
       #score{
           display: inline;
           position: relative;
@@ -139,22 +127,34 @@
 </head>
 
 <body>
+    <!--show topic and instructions-->
     <p id="instructions"><span style="font-size: 42px;">FLYING SPUR</span> <br>Collect stars. <br>Avoid bombs. <br>Spacebar, mousedown or touch to climb</p>
     <div id="info">
+        
+        <!--show number of lives remaining-->
         <div id="life">
             <img src="../../assets/plane/plane-icon.png" / id="livesImage"><div id="lives">3</div>
         </div>
+
+        <!--show number of points obtained-->
         <div id="score-panel">
             <div id="score">0</div><img src="../../assets/plane/star-icon.png" id="scoreImage"/>
         </div>
     </div>
+    
+    <!--When its game over the plane will dissappear and the game 
+        will show the leaderboard only when the player has scored high points-->
     <p id="gameover">Game over<br>
         <span class="myScoreText"style="font-size: 20px">Score : </span>
         <span id="myScore"style="font-size: 20px">0</span><br>
         <button onclick="myFunction()" id="showLeaderboard">SHOW LEADERBOARD</button>
         <div><ol id="highScores"></ol></div>
     </p>
+    
+    <!--a play button will pop up incase the player wants to play again-->
     <button id="playBtn">PLAY</button>
+    
+    <!--this is where the game actually starts and the game.js file is called-->
     <script type="module">
         import { Game } from './start/flyingSpur/Game.js';
 
@@ -164,14 +164,17 @@
         });
     </script>
     <script>
+        
+        //for showing the leaderboard 
         const targetDiv = document.getElementById("showScores");
         const btn = document.getElementById("showLeaderboard");
+        
         btn.onclick = function () {
-        if (targetDiv.style.display !== "none") {
-            targetDiv.style.display = "none";
-        } else {
-            targetDiv.style.display = "block";
-        }
+            if (targetDiv.style.display !== "none") {
+                targetDiv.style.display = "none";
+            } else {
+                targetDiv.style.display = "block";
+            }
         };
     </script>
 </body>

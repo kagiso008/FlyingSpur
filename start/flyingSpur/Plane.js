@@ -26,7 +26,7 @@ class Plane{
         
 		// Load a glTF resource
 		loader.load(
-			// resource URL
+			// resource URL (the actual UFO)
 			'UFO_Empty_2.glb',
 			// called when the resource is loaded
 			gltf => {
@@ -34,19 +34,19 @@ class Plane{
 				this.scene.add( gltf.scene );
                 this.plane = gltf.scene;
                 this.velocity = new Vector3(0,0,0.1);
-                
-                this.propeller = this.plane.getObjectByName("propeller");
 
                 this.ready = true;
     
 			},
-			// called while loading is progressing
+			
+            // called while loading is progressing
 			xhr => {
 
 				this.loadingBar.update('plane', xhr.loaded, xhr.total );
 				
 			},
-			// called when loading has errors
+			
+            // called when loading has errors
 			err => {
 
 				console.error( err );
@@ -61,8 +61,9 @@ class Plane{
         this.velocity.set(0,0,0.1);
     }
 
+
+    //the more ypu press space the more the velocity of the plane increases
     update(time){
-        if (this.propeller !== undefined) this.propeller.rotateZ(1);
 
         if (this.game.active){
             if (!this.game.spaceKey){
