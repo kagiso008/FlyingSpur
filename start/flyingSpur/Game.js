@@ -14,15 +14,15 @@ class Game{
 		const container = document.createElement( 'div' );
 		document.body.appendChild( container );
         
-        this.loadingBar = new LoadingBar();
-        this.loadingBar.visible = false;
+        this.loadingBar = new LoadingBar();//Create a loading bar.
+        this.loadingBar.visible = false;//Show th loading bar created.
 
-        this.clock = new THREE.Clock();
+        this.clock = new THREE.Clock();//Create an instance of a three.js clock- to keep track of the lapse time in the game.
 
-		this.assetsPath = '../../assets/';
+		this.assetsPath = '../../assets/';//Path to the assets folder.
         
-		this.camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 100 );
-        this.camera.position.set( -4.37, 0, -4.75 );
+		this.camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 100 );//Create a camera
+        this.camera.position.set( 4.37, 0, -5.00 );
         this.camera.lookAt(0, 0, 6);
 
         this.cameraController = new THREE.Object3D();

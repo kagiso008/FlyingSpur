@@ -3,6 +3,9 @@ import { GLTFLoader } from '../../libs/three137/GLTFLoader.js';
 import { Explosion } from './Explosion.js';
 
 class Obstacles{
+    //we'll have two obstacles, a star and a bomb. When you hit a star, your score 
+    //will increase by one and when you hit a bomb, your life will decrease by one.
+    //Initially your life is at three.
     constructor(game){
         this.assetsPath = game.assetsPath;
         this.loadingBar = game.loadingBar;
