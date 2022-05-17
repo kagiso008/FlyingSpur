@@ -19,29 +19,30 @@ class Game{
 
         this.clock = new THREE.Clock();//Create an instance of a three.js clock- to keep track of the lapse time in the game.
 
-		this.assetsPath = '../../assets/';//Path to the assets folder.
+	this.assetsPath = '../../assets/';//Path to the assets folder.
         
-		this.camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 100 );//Create a camera
-        this.camera.position.set( 4.37, 0, -5.00 );
-        this.camera.lookAt(0, 0, 6);
+	this.camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 100 );//Create a camera
+        this.camera.position.set( 4.37, 0, -5.00 );//Position of the camera
+        this.camera.lookAt(0, 0, 6); 
 
-        this.cameraController = new THREE.Object3D();
-        this.cameraController.add(this.camera);
-        this.cameraTarget = new THREE.Vector3(0,0,6);
+        this.cameraController = new THREE.Object3D(); //Because we are playing with camera movement- create an empty object 3D
+        this.cameraController.add(this.camera); //Add the camera to the object created above.
+        this.cameraTarget = new THREE.Vector3(0,0,6); //Target position
         
-		this.scene = new THREE.Scene();
-        this.scene.add(this.cameraController);
+	this.scene = new THREE.Scene(); //Create a scene
+        this.scene.add(this.cameraController); //Add contorller to the scene
 
-		const ambient = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
+	const ambient = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1); //Create a hemisphere light
         ambient.position.set( 0.5, 1, 0.25 );
-		this.scene.add(ambient);
-			
-		this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true } );
-		this.renderer.setPixelRatio( window.devicePixelRatio );
-		this.renderer.setSize( window.innerWidth, window.innerHeight );
+	this.scene.add(ambient); //Add the light to the scene
+		
+	//Set the renderer- lines 40-43
+	this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true } );
+	this.renderer.setPixelRatio( window.devicePixelRatio );
+	this.renderer.setSize( window.innerWidth, window.innerHeight );
         this.renderer.outputEncoding = THREE.sRGBEncoding;
-		container.appendChild( this.renderer.domElement );
-        this.setEnvironment();
+	container.appendChild( this.renderer.domElement );
+        this.setEnvironment(); //This sets the scene texture
         
         this.active = false;
         this.load();
@@ -147,23 +148,23 @@ class Game{
     
 	load(){
         this.loadSkybox();
-        this.loading = true;
-        this.loadingBar.visible = true;
+        this.loading = true; //This indicates that the current game state is loading.
+        this.loadingBar.visible = true; //Show loading bar.
 
-        this.plane = new Plane(this);
-        this.obstacles = new Obstacles(this);
+        this.plane = new Plane(this); //We load the skybox.
+        this.obstacles = new Obstacles(this); //Create a new instamce of a plane.
     }
 
     loadSkybox(){
         this.scene.background = new THREE.CubeTextureLoader()
 	        .setPath( `${this.assetsPath}/plane/paintedsky/` )
             .load( [
-                'px.jpg',
-                'nx.jpg',
-                'py.jpg',
-                'ny.jpg',
-                'pz.jpg',
-                'nz.jpg'
+                'px.jpg', //positive x-axis
+                'nx.jpg', //-x
+                'py.jpg', //+y
+                'ny.jpg', //-y
+                'pz.jpg', //+z
+                'nz.jpg' //-z
             ], () => {
                 this.renderer.setAnimationLoop(this.render.bind(this));
             } );
@@ -214,18 +215,21 @@ class Game{
     }
 
     updateCamera(){
-        this.cameraController.position.copy( this.plane.position );
-        this.cameraController.position.y = 0;
-        this.cameraTarget.copy(this.plane.position);
-        this.cameraTarget.z += 6;
-        this.camera.lookAt( this.cameraTarget );
+        this.cameraController.position.copy( this.plane.position ); //Camera controller- moves with the camera plane's position, that's how it is updated.
+        this.cameraController.position.y = 0; //Set the y position to 0- so the camera won't move as the plane goes up and down
+        this.cameraTarget.copy(this.plane.position); //Camera target is also placed in the planes position.
+        this.cameraTarget.z += 6; //We initialized the target as (0, 0, 6)
+        this.camera.lookAt( this.cameraTarget ); //Relative positioning.
+        
     }
 
-	render() {
-        if (this.loading){
+render() {
+//Check if we're still loading
+	if (this.loading){
+	    //If we are still loading, Check the ready flag of the plane.
             if (this.plane.ready && this.obstacles.ready){
-                this.loading = false;
-                this.loadingBar.visible = false;
+                this.loading = false; //If the plane is ready set loading to false
+                this.loadingBar.visible = false; //Hide the loading bar
             }else{
                 return;
             }
@@ -234,8 +238,8 @@ class Game{
         const dt = this.clock.getDelta();
         const time = this.clock.getElapsedTime();
 
-        this.plane.update(time);
-
+        this.plane.update(time); v
+	
         if (this.active){
             this.obstacles.update(this.plane.position, dt);
         }
