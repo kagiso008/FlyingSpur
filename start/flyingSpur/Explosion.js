@@ -85,10 +85,8 @@ void main() {
     const scale = 0.05;
     this.ball.scale.set(scale, scale, scale);
     parent.add( this.ball );
-
     this.tweens = [];
     this.tweens.push( new Tween(this.ball.scale, 'x', 0.2, 1.5, this.onComplete.bind(this), 'outQuad') );
-
     this.active = true;
   }
 
@@ -103,13 +101,11 @@ void main() {
 
   update(time) {
     if (!this.active) return;
-
     this.uniforms.u_time.value += time;
     this.uniforms.u_opacity.value = this.ball.material.opacity;
 
     if (this.tweens.length<2){
       const elapsedTime = this.uniforms.u_time.value - 1;
-
       if (elapsedTime > 0){
         this.tweens.push( new Tween(this.ball.material, 'opacity', 0, 0.5) );
       }
@@ -118,10 +114,8 @@ void main() {
     this.tweens.forEach( tween => {
       tween.update(time);
     });
-
     this.ball.scale.y = this.ball.scale.z = this.ball.scale.x;
   }
-
 }
 
 export { Explosion };

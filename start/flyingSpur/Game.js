@@ -8,8 +8,7 @@ import { SFX } from './SFX.js';
 const NO_OF_HIGH_SCORES = 10;
 const HIGH_SCORES = 'highScores';
 
-class Game{
-    
+class Game{    
 	constructor(){
 		const container = document.createElement( 'div' );
 		document.body.appendChild( container );
@@ -19,9 +18,9 @@ class Game{
 
         this.clock = new THREE.Clock();//Create an instance of a three.js clock- to keep track of the lapse time in the game.
 
-	this.assetsPath = '../../assets/';//Path to the assets folder.
+	    this.assetsPath = '../../assets/';//Path to the assets folder.
         
-	this.camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 100 );//Create a camera
+	    this.camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 100 );//Create a camera
         this.camera.position.set( 4.37, 0, -5.00 );//Position of the camera
         this.camera.lookAt(0, 0, 6); 
 
@@ -29,21 +28,21 @@ class Game{
         this.cameraController.add(this.camera); //Add the camera to the object created above.
         this.cameraTarget = new THREE.Vector3(0,0,6); //Target position
         
-	this.scene = new THREE.Scene(); //Create a scene
+	    this.scene = new THREE.Scene(); //Create a scene
         this.scene.add(this.cameraController); //Add contorller to the scene
 
-	const ambient = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1); //Create a hemisphere light
+	    const ambient = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1); //Create a hemisphere light
         ambient.position.set( 0.5, 1, 0.25 );
-	this.scene.add(ambient); //Add the light to the scene
+	    this.scene.add(ambient); //Add the light to the scene
 		
-	//Set the renderer- lines 40-43
-	this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true } );
-	this.renderer.setPixelRatio( window.devicePixelRatio );
-	this.renderer.setSize( window.innerWidth, window.innerHeight );
+        //Set the renderer- lines 40-43
+        this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true } );
+        this.renderer.setPixelRatio( window.devicePixelRatio );
+        this.renderer.setSize( window.innerWidth, window.innerHeight );
         this.renderer.outputEncoding = THREE.sRGBEncoding;
-	container.appendChild( this.renderer.domElement );
+        container.appendChild( this.renderer.domElement );
         this.setEnvironment(); //This sets the scene texture
-        
+            
         this.active = false;
         this.load();
 
@@ -223,9 +222,9 @@ class Game{
         
     }
 
-render() {
-//Check if we're still loading
-	if (this.loading){
+    render() {
+        //Check if we're still loading
+	    if (this.loading){
 	    //If we are still loading, Check the ready flag of the plane.
             if (this.plane.ready && this.obstacles.ready){
                 this.loading = false; //If the plane is ready set loading to false
@@ -245,9 +244,7 @@ render() {
         }
     
         this.updateCamera();
-    
         this.renderer.render( this.scene, this.camera );
-
     }
 }
 
@@ -256,11 +253,11 @@ function showHighScores() {
     const highScoreList = document.getElementById('highScores');
   
     highScoreList.innerHTML = highScores
-      .map((score) => `<li>${score.score} - ${score.name}`)
-      .join('');
-  }
+    .map((score) => `<li>${score.score} - ${score.name}`)
+    .join('');
+}
   
-  function checkHighScore(score) {
+function checkHighScore(score) {
     const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
     const lowestScore = highScores[NO_OF_HIGH_SCORES - 1]?.score ?? 0;
   
@@ -270,14 +267,14 @@ function showHighScores() {
       saveHighScore(newScore, highScores);
       showHighScores();
     }
-  }
+}
   
-  function saveHighScore(score, highScores) {
+function saveHighScore(score, highScores) {
     highScores.push(score);
     highScores.sort((a, b) => b.score - a.score);
     highScores.splice(NO_OF_HIGH_SCORES);
   
     localStorage.setItem('highScores', JSON.stringify(highScores));
-  }
+}
 
 export { Game };

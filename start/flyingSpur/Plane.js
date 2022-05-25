@@ -34,23 +34,18 @@ class Plane{
 				this.scene.add( gltf.scene );
                 this.plane = gltf.scene;
                 this.velocity = new Vector3(0,0,0.1);
-
                 this.ready = true;
     
 			},
 			
             // called while loading is progressing
 			xhr => {
-
 				this.loadingBar.update('plane', xhr.loaded, xhr.total );
-				
 			},
 			
             // called when loading has errors
 			err => {
-
 				console.error( err );
-
 			}
 		);
 	}	
@@ -64,7 +59,6 @@ class Plane{
 
     //the more ypu press space the more the velocity of the plane increases
     update(time){
-
         if (this.game.active){
             if (!this.game.spaceKey){
                 this.velocity.y -= 0.001;
@@ -79,7 +73,6 @@ class Plane{
             this.plane.rotation.set(0, 0, Math.sin(time*3)*0.2, 'XYZ');
             this.plane.position.y = Math.cos(time) * 1.5;
         }
-
     }
 }
 

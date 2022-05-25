@@ -59,40 +59,30 @@ class Obstacles{
 			'bomb.glb',
 			// called when the resource is loaded
 			gltf => {
-
                 this.bomb = gltf.scene.children[0];
-
                 if (this.star !== undefined) this.initialize();
-
 			},
 			// called while loading is progressing
 			xhr => {
-
 				this.loadingBar.update('bomb', xhr.loaded, xhr.total );
-				
 			},
 			// called when loading has errors
 			err => {
-
 				console.error( err );
-
 			}
 		);
 	}
 
 	initialize(){
         this.obstacles = [];
-        
         const obstacle = new Group();
         
         obstacle.add(this.star);
-        
         this.bomb.rotation.x = -Math.PI*0.5;
         this.bomb.position.y = 7.5;
         obstacle.add(this.bomb);
 
         let rotate=true;
-
         for(let y=5; y>-8; y-=2.5){
             rotate = !rotate;
             if (y==0) continue;
@@ -102,21 +92,17 @@ class Obstacles{
             obstacle.add(bomb);
         
         }
+        
         this.obstacles.push(obstacle);
-
         this.scene.add(obstacle);
 
         for(let i=0; i<3; i++){
-            
             const obstacle1 = obstacle.clone();
-            
             this.scene.add(obstacle1);
             this.obstacles.push(obstacle1);
-
         }
 
         this.reset();
-
 		this.ready = true;
     }
 
@@ -149,7 +135,6 @@ class Obstacles{
 
 	update(pos, time){
         let collisionObstacle;
-
         this.obstacles.forEach( obstacle =>{
             obstacle.children[0].rotateY(0.01);
             const relativePosZ = obstacle.position.z-pos.z;
@@ -161,7 +146,6 @@ class Obstacles{
             }
         });
 
-       
         if (collisionObstacle!==undefined){
 			let minDist = Infinity;
 			collisionObstacle.children.some( child => {

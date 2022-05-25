@@ -67,13 +67,10 @@ class PathfindingHelper extends Object3D {
     ];
 
     this._markers.forEach( ( marker ) => {
-
       marker.visible = false;
-
       this.add( marker );
 
     } );
-
   }
 
   /**
@@ -107,11 +104,8 @@ class PathfindingHelper extends Object3D {
       this._pathMarker.add( node );
 
     }
-
     this._pathMarker.visible = true;
-
     return this;
-
   }
 
   /**
@@ -131,11 +125,9 @@ class PathfindingHelper extends Object3D {
    * @return {this}
    */
   setTargetPosition( position ) {
-
     this._targetMarker.position.copy( position );
     this._targetMarker.visible = true;
     return this;
-
   }
 
   /**
@@ -143,11 +135,9 @@ class PathfindingHelper extends Object3D {
    * @return {this}
    */
   setNodePosition( position ) {
-
     this._nodeMarker.position.copy( position );
     this._nodeMarker.visible = true;
     return this;
-
   }
 
   /**
@@ -155,11 +145,9 @@ class PathfindingHelper extends Object3D {
    * @return {this}
    */
   setStepPosition( position ) {
-
     this._stepMarker.position.copy( position );
     this._stepMarker.visible = true;
     return this;
-
   }
 
   /**
@@ -169,22 +157,15 @@ class PathfindingHelper extends Object3D {
   reset () {
 
     while ( this._pathMarker.children.length ) {
-
       this._pathMarker.children[ 0 ].visible = false;
       this._pathMarker.remove( this._pathMarker.children[ 0 ] );
-
     }
 
     this._markers.forEach( ( marker ) => {
-
       marker.visible = false;
-
     } );
-
     return this;
-
   }
-
 }
 
 export { PathfindingHelper };
