@@ -4,9 +4,9 @@
 <head>
 
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=yes">
   <!--favicon -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <link rel="apple-touch-icon" sizes="180x180" href="../../css/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="../../css/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="../../css/favicon/favicon-16x16.png">
@@ -19,7 +19,11 @@
   <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
 
   <style>
-      
+      body{
+          margin: 0;
+          font-family: 'RocknRoll One', sans-serif;
+      } 
+
       #playBtn{
           position: absolute;
           width: 200px;
@@ -147,8 +151,7 @@
     <p id="gameover">Game over<br>
         <span class="myScoreText"style="font-size: 20px">Score : </span>
         <span id="myScore"style="font-size: 20px">0</span><br>
-        <button onclick="myFunction()" id="showLeaderboard">SHOW LEADERBOARD</button>
-        <div><ol id="highScores"></ol></div>
+        <span id="first"style="font-size: 20px">0</span><br>
     </p>
     
     <!--a play button will pop up incase the player wants to play again-->
@@ -162,20 +165,6 @@
             const game = new Game();
             window.game = game;  
         });
-    </script>
-    <script>
-        
-        //for showing the leaderboard 
-        const targetDiv = document.getElementById("showScores");
-        const btn = document.getElementById("showLeaderboard");
-        
-        btn.onclick = function () {
-            if (targetDiv.style.display !== "none") {
-                targetDiv.style.display = "none";
-            } else {
-                targetDiv.style.display = "block";
-            }
-        };
     </script>
 </body>
 </html>

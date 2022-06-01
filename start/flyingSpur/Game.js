@@ -152,6 +152,17 @@ class Game{
 
         this.plane = new Plane(this); //We load the skybox.
         this.obstacles = new Obstacles(this); //Create a new instamce of a plane.
+
+        this.loadSFX();
+    }
+
+    loadSFX(){
+        this.sfx = new SFX(this.camera, this.assetsPath + 'plane/');
+
+        this.sfx.load('explosion');
+        this.sfx.load('engine',false,1);
+        this.sfx.load('gliss');
+        this.sfx.load('gameover');
     }
 
     loadSkybox(){
@@ -192,6 +203,10 @@ class Game{
         scoreImg.style.visibility = 'hidden';
         livesImg.style.visibility = 'hidden';
 
+        this.sfx.stopAll();
+        this.sfx.play('gameover');
+        
+
         checkHighScore(this.score);
     }
 
@@ -201,6 +216,8 @@ class Game{
         const elm = document.getElementById('score');
 
         elm.innerHTML = this.score;
+
+        this.sfx.play('gliss');
     }
 
     decLives(){
@@ -211,6 +228,8 @@ class Game{
         elm.innerHTML = this.lives;
 
         if (this.lives==0) setTimeout(this.gameOver.bind(this), 1200);
+
+        this.sfx.play('explosion');
     }
 
     updateCamera(){
@@ -237,7 +256,7 @@ class Game{
         const dt = this.clock.getDelta();
         const time = this.clock.getElapsedTime();
 
-        this.plane.update(time); v
+        this.plane.update(time);
 	
         if (this.active){
             this.obstacles.update(this.plane.position, dt);
