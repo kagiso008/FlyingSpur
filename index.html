@@ -19,40 +19,26 @@
   <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
 
   <style>
-      body{
-          margin: 0;
-          font-family: 'RocknRoll One', sans-serif;
-      } 
+    body{
+        margin: 0;
+        font-family: 'RocknRoll One', sans-serif;
+    } 
 
-      #playBtn{
-          position: absolute;
-          width: 200px;
-          height: 100px;
-          font-family: 'RocknRoll One', sans-serif;
-          font-size: 40px;
-          bottom: 20px;
-          border-radius: 20px;
-          background-color: darkblue;
-          color: white;
-          left: 50%;
-          transform: translateX(-50%);
-      }
+    #playBtn{
+        position: absolute;
+        width: 200px;
+        height: 100px;
+        font-family: 'RocknRoll One', sans-serif;
+        font-size: 40px;
+        bottom: 20px;
+        border-radius: 20px;
+        background-color: darkblue;
+        color: white;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 
-      #showLeaderboard{
-          position: absolute;
-          width: 200px;
-          height: 80px;
-          font-family: 'RocknRoll One', sans-serif;
-          font-size: 20px;
-          top: 280px;
-          border-radius: 20px;
-          background-color: darkblue;
-          color: white;
-          left: 50%;
-          transform: translateX(-50%);
-      }
-
-      #instructions{
+    #instructions{
           position:absolute;
           top: 1px;
           font-family: 'RocknRoll One', sans-serif;
@@ -70,7 +56,7 @@
       #gameover{
           display: none;
           position:absolute;
-          top: 50px;
+          top: 0px;
           font-family: 'RocknRoll One', sans-serif;
           font-size: 50px;
           color: darkblue;
@@ -124,6 +110,13 @@
           display:block;
           overflow: auto;
       }
+      br {
+        content: "";
+        margin: 0px;
+        display: block;
+        font-size: 24%;
+      }
+
       
   </style>
 
@@ -146,12 +139,10 @@
         </div>
     </div>
     
-    <!--When its game over the plane will dissappear and the game 
-        will show the leaderboard only when the player has scored high points-->
+    <!--When its game over the plane will dissappear and the game will show the leaderboard-->
     <p id="gameover">Game over<br>
-        <span class="myScoreText"style="font-size: 20px">Score : </span>
-        <span id="myScore"style="font-size: 20px">0</span><br>
-        <span id="first"style="font-size: 20px">0</span><br>
+        <span class="instructions"style="font-size: 20px">leaderboard</span>
+        <span class="center" style="font-size: 15px" id="highScores"></span>
     </p>
     
     <!--a play button will pop up incase the player wants to play again-->

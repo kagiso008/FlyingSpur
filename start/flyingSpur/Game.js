@@ -160,7 +160,7 @@ class Game{
         this.sfx = new SFX(this.camera, this.assetsPath + 'plane/');
 
         this.sfx.load('explosion');
-        this.sfx.load('engine',false,1);
+        this.sfx.load('engine',true,1);
         this.sfx.load('gliss');
         this.sfx.load('gameover');
     }
@@ -189,20 +189,12 @@ class Game{
         gameover.style.display = 'block';
         btn.style.display = 'block';
 
-        let myScore = document.getElementById('myScore');
-        myScore.innerHTML = this.score;
-
         let score = document.getElementById('score');
         let lives = document.getElementById('lives');
         let scoreImg = document.getElementById('scoreImage');
         let livesImg = document.getElementById('livesImage');
         
         this.plane.visible = false;
-        score.style.visibility = 'hidden';
-        lives.style.visibility = 'hidden';
-        scoreImg.style.visibility = 'hidden';
-        livesImg.style.visibility = 'hidden';
-
         this.sfx.stopAll();
         this.sfx.play('gameover');
         
@@ -273,7 +265,7 @@ function showHighScores() {
   
     highScoreList.innerHTML = highScores
     .map((score) => `<li>${score.score} - ${score.name}`)
-    .join('');
+    .join(''); 
 }
   
 function checkHighScore(score) {
@@ -284,8 +276,8 @@ function checkHighScore(score) {
       const name = prompt('You got a highscore! Enter name:');
       const newScore = { score, name };
       saveHighScore(newScore, highScores);
-      showHighScores();
     }
+    showHighScores();
 }
   
 function saveHighScore(score, highScores) {
