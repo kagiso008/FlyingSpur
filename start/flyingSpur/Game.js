@@ -105,7 +105,7 @@ class Game{
 
     keyDown(evt){
         switch(evt.keyCode){
-            case 32:
+            case 38:
                 this.spaceKey = true; 
                 break;
         }
@@ -113,7 +113,7 @@ class Game{
     
     keyUp(evt){
         switch(evt.keyCode){
-            case 32:
+            case 38:
                 this.spaceKey = false;
                 break;
         }
