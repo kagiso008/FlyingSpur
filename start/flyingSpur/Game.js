@@ -169,12 +169,12 @@ class Game{
         this.scene.background = new THREE.CubeTextureLoader()
 	        .setPath( `${this.assetsPath}/plane/paintedsky/` )
             .load( [
-                'px.jpg', //positive x-axis
-                'nx.jpg', //-x
-                'py.jpg', //+y
-                'ny.jpg', //-y
-                'pz.jpg', //+z
-                'nz.jpg' //-z
+                'hot_nx.jpg', //positive x-axis
+                'hot_px.jpg', //-x
+                'hot_py.jpg', //+y
+                'hot_ny.jpg', //-y
+                'hot_pz.jpg', //+z
+                'hot_nz.jpg' //-z
             ], () => {
                 this.renderer.setAnimationLoop(this.render.bind(this));
             } );
