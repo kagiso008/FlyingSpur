@@ -63,12 +63,12 @@ void main() {
       u_mouse: { value:{ x:0.0, y:0.0 }},
       u_opacity: { value: 0.6 },
       u_resolution: { value:{ x:0, y:0 }},
-      u_tex: { value: new TextureLoader().load(`${game.assetsPath}plane/explosion.png`)}
+      u_tex: { value: new TextureLoader().load(`${game.assetsPath}plane/explosion.png`)} //Explosion image in the assets folder
     }
 
     ShaderChunk.noise = noise; //Use it to create an explosion effect
 
-    const material = new ShaderMaterial( {
+    const material = new ShaderMaterial( { //Create one 
       uniforms: this.uniforms,
       vertexShader: Explosion.vshader,
       fragmentShader: Explosion.fshader,
@@ -76,40 +76,40 @@ void main() {
       opacity: 0.6
     } );
 
-    this.ball = new Mesh( geometry, material );
+    this.ball = new Mesh( geometry, material ); //With the geometry and material we can create a mesh
     const scale = 0.05;
     this.ball.scale.set(scale, scale, scale);
-    parent.add( this.ball );
-    this.tweens = [];
-    this.tweens.push( new Tween(this.ball.scale, 'x', 0.2, 1.5, this.onComplete.bind(this), 'outQuad') );
+    parent.add( this.ball ); //Add mesh to the parent
+    this.tweens = []; //From my tween 3D library
+    this.tweens.push( new Tween(this.ball.scale, 'x', 0.2, 1.5, this.onComplete.bind(this), 'outQuad') ); //Targeted object- the ball scale; Adjusted property- x prop; Tarheted x value is 0.2 at rate of 1.5 secs 
     this.active = true;
   }
 
   onComplete(){
-    this.ball.parent.remove(this.ball);
-    this.tweens = [];
-    this.active = false;
-    this.ball.geometry.dispose();
-    this.ball.material.dispose();
-    if (this.obstacles) this.obstacles.removeExplosion(this);
+    this.ball.parent.remove(this.ball); //Remove ball mesh from its parent
+    this.tweens = []; //Clear the tweens array
+    this.active = false; 
+    this.ball.geometry.dispose(); //To save memory
+    this.ball.material.dispose(); //Same
+    if (this.obstacles) this.obstacles.removeExplosion(this); 
   }
 
   update(time) {
-    if (!this.active) return;
-    this.uniforms.u_time.value += time;
-    this.uniforms.u_opacity.value = this.ball.material.opacity;
+    if (!this.active) return; //Chekc if we're active
+    this.uniforms.u_time.value += time; //Adjust time uniform
+    this.uniforms.u_opacity.value = this.ball.material.opacity; //Adjust opacity uniform
 
     if (this.tweens.length<2){
-      const elapsedTime = this.uniforms.u_time.value - 1;
+      const elapsedTime = this.uniforms.u_time.value - 1; //Single tween in the array value, check if u_time value > 1
       if (elapsedTime > 0){
-        this.tweens.push( new Tween(this.ball.material, 'opacity', 0, 0.5) );
+        this.tweens.push( new Tween(this.ball.material, 'opacity', 0, 0.5) ); //Second tween, target- ball material
       }
     }
 
     this.tweens.forEach( tween => {
-      tween.update(time);
+      tween.update(time); //Update both tweens
     });
-    this.ball.scale.y = this.ball.scale.z = this.ball.scale.x;
+    this.ball.scale.y = this.ball.scale.z = this.ball.scale.x; //Copy to z an y components- even scale on each axis.
   }
 }
 

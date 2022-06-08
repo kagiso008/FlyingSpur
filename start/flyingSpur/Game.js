@@ -95,7 +95,7 @@ class Game{
 
         this.active = true;
 
-        this.sfx.play('engine');
+        this.sfx.play('engine'); //Play engine sound
 
     }
 
@@ -163,8 +163,9 @@ class Game{
     }
 
     loadSFX(){
-        this.sfx = new SFX(this.camera, this.assetsPath + 'plane/');
+        this.sfx = new SFX(this.camera, this.assetsPath + 'plane/'); //New Sfx instance
 
+        //From assets plane folder
         this.sfx.load('explosion');
         this.sfx.load('engine',true,1);
         this.sfx.load('gliss');
@@ -203,7 +204,7 @@ class Game{
         
         this.plane.visible = false;
         this.sfx.stopAll();
-        this.sfx.play('gameover');
+        this.sfx.play('gameover'); //Play gameover sound
         
 
         checkHighScore(this.score);
@@ -216,7 +217,7 @@ class Game{
 
         elm.innerHTML = this.score; //Display on screen
 
-        this.sfx.play('gliss');
+        this.sfx.play('gliss'); //Play gliss sound 
     }
 
     decLives(){
@@ -228,7 +229,7 @@ class Game{
 
         if (this.lives==0) setTimeout(this.gameOver.bind(this), 1200); //If lives == 0, call the gameOver method.
 
-        this.sfx.play('explosion');
+        this.sfx.play('explosion'); //Play explosion
     }
 
     updateCamera(){

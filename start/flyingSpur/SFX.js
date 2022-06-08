@@ -2,13 +2,14 @@ import { AudioListener, Audio, PositionalAudio, AudioLoader } from '../../libs/t
 
 class SFX{
     constructor(camera, assetsPath){
-        this.listener = new AudioListener();
-        camera.add(this.listener);
+        this.listener = new AudioListener(); //enables us to hear sounds
+        camera.add(this.listener); //Attached to the camera
 
-        this.assetsPath = assetsPath;
-        this.sounds = {};
+        this.assetsPath = assetsPath; //To save reference
+        this.sounds = {}; //Sound object
     }
 
+    //Load sound files
     load(name, loop=false, vol=0.5, obj=null){
         const sound = (obj==null) ? new Audio( this.listener ) : new
         PositionalAudio(this.listener);
@@ -24,27 +25,27 @@ class SFX{
     }
 
     setVolume(name, volume){
-        const sound = this.sounds(name);
+        const sound = this.sounds(name); //Get sound
 
-        if(sound !== undefined) sound.setVolume(volume)
+        if(sound !== undefined) sound.setVolume(volume) //Use sound
     }
 
     setLoop(name, loop){
-        const sound = this.sounds(name);
+        const sound = this.sounds(name); //Get sound
         
-        if(sound!== undefined) sound.setLoop(loop)
+        if(sound!== undefined) sound.setLoop(loop) //Use sound
     }
 
     play(name){
-        const sound = this.sounds[name];
+        const sound = this.sounds[name]; //Get sound
         
-        if(sound!== undefined && !sound.isPlaying) sound.play();
+        if(sound!== undefined && !sound.isPlaying) sound.play(); //Call play method if it exits and the sound is not playing
     }
 
     stop(name){
-        const sound = this.sounds[name];
+        const sound = this.sounds[name]; //Get sound
         
-        if(sound!== undefined && !sound.isPlaying) sound.stop();
+        if(sound!== undefined && !sound.isPlaying) sound.stop(); //Opposite of play
     }
 
     stopAll(){
@@ -52,7 +53,7 @@ class SFX{
     }
 
     pause(name){
-        const sound = this.sounds[name];
+        const sound = this.sounds[name];//Same as play method
         
         if(sound!== undefined && !sound.isPlaying) sound.pause();
     }
