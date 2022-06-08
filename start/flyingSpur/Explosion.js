@@ -37,11 +37,6 @@ uniform sampler2D u_tex;
 
 varying float noise;
 
-//	<https://www.shadertoy.com/view/4dS3Wd>
-//	By Morgan McGuire @morgan3d, http://graphicscodex.com
-
-//https://www.clicktorelease.com/blog/vertex-displacement-noise-3d-webgl-glsl-three-js/
-
 float random( vec3 scale, float seed ){
   return fract( sin( dot( gl_FragCoord.xyz + seed, scale ) ) * 43758.5453 + seed ) ;
 }
@@ -59,11 +54,11 @@ void main() {
 }
 `
   constructor(parent, obstacles){
-    const geometry = new IcosahedronGeometry( 20, 4 );
+    const geometry = new IcosahedronGeometry( 20, 4 ); //Create an instance of the IcosahendronGeometry
     
-    this.obstacles = obstacles;
+    this.obstacles = obstacles; //Local reference
 
-    this.uniforms = {
+    this.uniforms = { //Uniforms objects
       u_time: { value: 0.0 },
       u_mouse: { value:{ x:0.0, y:0.0 }},
       u_opacity: { value: 0.6 },
@@ -71,7 +66,7 @@ void main() {
       u_tex: { value: new TextureLoader().load(`${game.assetsPath}plane/explosion.png`)}
     }
 
-    ShaderChunk.noise = noise;
+    ShaderChunk.noise = noise; //Use it to create an explosion effect
 
     const material = new ShaderMaterial( {
       uniforms: this.uniforms,
