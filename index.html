@@ -38,6 +38,34 @@
         transform: translateX(-50%);
     }
 
+    #levelTwoBtn{
+        position: absolute;
+        width: 200px;
+        height: 100px;
+        font-family: 'RocknRoll One', sans-serif;
+        font-size: 40px;
+        bottom: -300%;
+        border-radius: 20px;
+        background-color: darkblue;
+        color: white;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #levelThreeBtn{
+        position: absolute;
+        width: 200px;
+        height: 100px;
+        font-family: 'RocknRoll One', sans-serif;
+        font-size: 40px;
+        bottom: -300%;
+        border-radius: 20px;
+        background-color: darkblue;
+        color: white;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
     #instructions{
           position:absolute;
           top: 1px;
@@ -54,6 +82,38 @@
       }
 
       #gameover{
+          display: none;
+          position:absolute;
+          top: 0px;
+          font-family: 'RocknRoll One', sans-serif;
+          font-size: 50px;
+          color: darkblue;
+          width: 300px;
+          left: 50%;
+          transform: translateX(-50%);
+          border-radius: 20px;
+          padding: 30px;
+          background-color: rgba(255, 255, 255, 0.5);
+          text-align: center;
+      }
+
+      #level2{
+          display: none;
+          position:absolute;
+          top: 0px;
+          font-family: 'RocknRoll One', sans-serif;
+          font-size: 50px;
+          color: darkblue;
+          width: 300px;
+          left: 50%;
+          transform: translateX(-50%);
+          border-radius: 20px;
+          padding: 30px;
+          background-color: rgba(255, 255, 255, 0.5);
+          text-align: center;
+      }
+
+      #level3{
           display: none;
           position:absolute;
           top: 0px;
@@ -144,10 +204,24 @@
         <span class="instructions"style="font-size: 20px">leaderboard</span>
         <span class="center" style="font-size: 15px" id="highScores"></span>
     </p>
+
+    <p id="level2">LEVEL 2<br>
+        <span class="instructions"><br>
+            <!--a continue button will pop up incase the player wants to continue to the next level-->
+            <button id="levelTwoBtn">Continue</button>    
+        </span>
+    </p>
+        
+    <p id="level3">LEVEL 3<br>
+        <span class="instructions">
+            <!--a continue button will pop up incase the player wants to continue to the next level-->
+            <button id="levelThreeBtn">Continue</button>    
+        </span>
+    </p>
     
     <!--a play button will pop up incase the player wants to play again-->
     <button id="playBtn">PLAY</button>
-    
+
     <!--this is where the game actually starts and the game.js file is called-->
     <script type="module">
         import { Game } from './start/flyingSpur/Game.js';

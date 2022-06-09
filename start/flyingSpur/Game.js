@@ -60,8 +60,70 @@ class Game{
 
         const btn = document.getElementById('playBtn');
         btn.addEventListener('click', this.startGame.bind(this));
-	}
+
+        const levelTwoBtn = document.getElementById('levelTwoBtn');
+        levelTwoBtn.addEventListener('click', this.levelTwo.bind(this));
+
+        const levelThreeBtn = document.getElementById('levelThreeBtn');
+        levelThreeBtn.addEventListener('click', this.levelThree.bind(this));
+    }
 	
+    levelTwo(){
+        const level2 = document.getElementById('level2');
+        const levelTwobtn = document.getElementById('levelTwoBtn');
+
+        level2.style.display = 'none';
+        levelTwobtn.style.display = 'none';
+
+        let elm = document.getElementById('score');
+        elm.innerHTML = this.score;
+        
+        elm = document.getElementById('lives');
+        elm.innerHTML = this.lives;
+
+        let scoreImg = document.getElementById('scoreImage');
+        let livesImg = document.getElementById('livesImage');
+        
+        score.style.visibility = 'visible';
+        lives.style.visibility = 'visible';
+        scoreImg.style.visibility = 'visible';
+        livesImg.style.visibility = 'visible';
+
+        this.plane.reset();
+        this.obstacles.reset();
+
+        this.active = true;
+        this.sfx.play('engine');
+    }
+
+    levelThree(){
+        const level3 = document.getElementById('level3');
+        const levelThreebtn = document.getElementById('levelThreeBtn');
+
+        level3.style.display = 'none';
+        levelThreebtn.style.display = 'none';
+
+        let elm = document.getElementById('score');
+        elm.innerHTML = this.score;
+        
+        elm = document.getElementById('lives');
+        elm.innerHTML = this.lives;
+
+        let scoreImg = document.getElementById('scoreImage');
+        let livesImg = document.getElementById('livesImage');
+        
+        score.style.visibility = 'visible';
+        lives.style.visibility = 'visible';
+        scoreImg.style.visibility = 'visible';
+        livesImg.style.visibility = 'visible';
+
+        this.plane.reset();
+        this.obstacles.reset();
+
+        this.active = true;
+        this.sfx.play('engine');
+    }
+
     startGame(){
         const gameover = document.getElementById('gameover');
         const instructions = document.getElementById('instructions');
@@ -92,8 +154,8 @@ class Game{
         this.obstacles.reset();
 
         this.active = true;
-
         this.sfx.play('engine');
+        this.loadSkybox();
 
     }
 
@@ -159,6 +221,7 @@ class Game{
     loadSFX(){
         this.sfx = new SFX(this.camera, this.assetsPath + 'plane/');
 
+        this.sfx.load('levelup')
         this.sfx.load('explosion');
         this.sfx.load('engine',true,1);
         this.sfx.load('gliss');
@@ -175,6 +238,36 @@ class Game{
                 'hot_ny.jpg', //-y
                 'hot_pz.jpg', //+z
                 'hot_nz.jpg' //-z
+            ], () => {
+                this.renderer.setAnimationLoop(this.render.bind(this));
+            } );
+    }
+
+    loadSkybox2(){
+        this.scene.background = new THREE.CubeTextureLoader()
+	        .setPath( `${this.assetsPath}/plane/paintedsky/` )
+            .load( [
+                'nx.jpg', //positive x-axis
+                'px.jpg', //-x
+                'py.jpg', //+y
+                'ny.jpg', //-y
+                'pz.jpg', //+z
+                'nz.jpg' //-z
+            ], () => {
+                this.renderer.setAnimationLoop(this.render.bind(this));
+            } );
+    }
+
+    loadSkybox3(){
+        this.scene.background = new THREE.CubeTextureLoader()
+	        .setPath( `${this.assetsPath}/plane/paintedsky/` )
+            .load( [
+                'gal_nx.jpg', //positive x-axis
+                'gal_px.jpg', //-x
+                'gal_py.jpg', //+y
+                'ga_ny.jpg', //-y
+                'gal_pz.jpg', //+z
+                'gal_nz.jpg' //-z
             ], () => {
                 this.renderer.setAnimationLoop(this.render.bind(this));
             } );
@@ -202,12 +295,57 @@ class Game{
         checkHighScore(this.score);
     }
 
+    level2(){
+        this.active = false;
+
+        const level2 = document.getElementById('level2');
+        const levelTwobtn = document.getElementById('levelTwoBtn');
+
+        level2.style.display = 'block';
+        levelTwobtn.style.display = 'block';
+
+        let score = document.getElementById('score');
+        let lives = document.getElementById('lives');
+        let scoreImg = document.getElementById('scoreImage');
+        let livesImg = document.getElementById('livesImage');
+        
+        this.loadSkybox2();
+        this.plane.visible = false;
+        this.sfx.stopAll();
+        this.sfx.play('levelup');
+    }
+
+    level3(){
+        this.active = false;
+
+        const level3 = document.getElementById('level3');
+        const levelThreebtn = document.getElementById('levelThreeBtn');
+
+        level3.style.display = 'block';
+        levelThreebtn.style.display = 'block';
+
+        let score = document.getElementById('score');
+        let lives = document.getElementById('lives');
+        let scoreImg = document.getElementById('scoreImage');
+        let livesImg = document.getElementById('livesImage');
+        
+        this.loadSkybox3();
+        this.plane.visible = false;
+        this.sfx.stopAll();
+        this.sfx.play('levelup');
+    }
+
     incScore(){
         this.score++;
-
         const elm = document.getElementById('score');
-
         elm.innerHTML = this.score;
+        if (this.score==10){
+            setTimeout(this.level2.bind(this), 500);
+        }
+
+        if (this.score==30){
+            setTimeout(this.level3.bind(this), 500);
+        }
 
         this.sfx.play('gliss');
     }
