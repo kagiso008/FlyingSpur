@@ -43,21 +43,21 @@ class Game{
         container.appendChild( this.renderer.domElement );
         this.setEnvironment(); //This sets the scene texture
             
-        this.active = false;
+        this.active = false; //Property for play button
         this.load();
 
+        //Event-listeners
         window.addEventListener('resize', this.resize.bind(this) );
-
-        document.addEventListener('keydown', this.keyDown.bind(this));
-        document.addEventListener('keyup', this.keyUp.bind(this));
-
-        document.addEventListener('touchstart', this.mouseDown.bind(this) );
-        document.addEventListener('touchend', this.mouseUp.bind(this) );
-        document.addEventListener('mousedown', this.mouseDown.bind(this) );
-        document.addEventListener('mouseup', this.mouseUp.bind(this) );
+        document.addEventListener('keydown', this.keyDown.bind(this)); //Keydown event-listener
+        document.addEventListener('keyup', this.keyUp.bind(this)); //Keyup event-listener
+        document.addEventListener('touchstart', this.mouseDown.bind(this)); //Touchstart event-listener
+        document.addEventListener('touchend', this.mouseUp.bind(this)); //Touchend event-listener
+        document.addEventListener('mousedown', this.mouseDown.bind(this)); //Mousedown event-listener
+        document.addEventListener('mouseup', this.mouseUp.bind(this)); //Mouseup event-listener
         
-        this.spaceKey = false;
+        this.spaceKey = false; //All event-listeners will handle spaceKey class property, default to false
 
+<<<<<<< HEAD
         const btn = document.getElementById('playBtn');
         btn.addEventListener('click', this.startGame.bind(this));
 
@@ -67,6 +67,11 @@ class Game{
         const levelThreeBtn = document.getElementById('levelThreeBtn');
         levelThreeBtn.addEventListener('click', this.levelThree.bind(this));
     }
+=======
+        const btn = document.getElementById('playBtn'); //Pass id to button
+        btn.addEventListener('click', this.startGame.bind(this)); //button event-listener
+	}
+>>>>>>> c3205aeee75e3379ccfb63be4310b16c0585ce22
 	
     levelTwo(){
         const level2 = document.getElementById('level2');
@@ -125,22 +130,24 @@ class Game{
     }
 
     startGame(){
+        //Pass ids to variables.
         const gameover = document.getElementById('gameover');
         const instructions = document.getElementById('instructions');
         const btn = document.getElementById('playBtn');
 
+        //Hide the elements
         gameover.style.display = 'none';
         instructions.style.display = 'none';
         btn.style.display = 'none';
 
-        this.score = 0;
-        this.lives = 3;
+        this.score = 0; //Set game property score to 0
+        this.lives = 3; //Set game property lives to 3
 
-        let elm = document.getElementById('score');
-        elm.innerHTML = this.score;
+        let elm = document.getElementById('score'); //set id to variable
+        elm.innerHTML = this.score; //Place it on the screen
         
-        elm = document.getElementById('lives');
-        elm.innerHTML = this.lives;
+        elm = document.getElementById('lives'); //set id to variable
+        elm.innerHTML = this.lives; //Place it on the screen
 
         let scoreImg = document.getElementById('scoreImage');
         let livesImg = document.getElementById('livesImage');
@@ -150,12 +157,18 @@ class Game{
         scoreImg.style.visibility = 'visible';
         livesImg.style.visibility = 'visible';
 
+        //Reset plane and obstacles
         this.plane.reset();
         this.obstacles.reset();
 
         this.active = true;
+<<<<<<< HEAD
         this.sfx.play('engine');
         this.loadSkybox();
+=======
+
+        this.sfx.play('engine'); //Play engine sound
+>>>>>>> c3205aeee75e3379ccfb63be4310b16c0585ce22
 
     }
 
@@ -165,6 +178,7 @@ class Game{
     	this.renderer.setSize( window.innerWidth, window.innerHeight ); 
     }
 
+    //KeyDown handler
     keyDown(evt){
         switch(evt.keyCode){
             case 38:
@@ -173,6 +187,7 @@ class Game{
         }
     }
     
+    //KeyUp handler
     keyUp(evt){
         switch(evt.keyCode){
             case 38:
@@ -181,10 +196,12 @@ class Game{
         }
     }
 
+    //MouseDwon handler
     mouseDown(evt){
         this.spaceKey = true;
     }
 
+    //MouseUp handler
     mouseUp(evt){
         this.spaceKey = false;
     }
@@ -219,9 +236,13 @@ class Game{
     }
 
     loadSFX(){
-        this.sfx = new SFX(this.camera, this.assetsPath + 'plane/');
+        this.sfx = new SFX(this.camera, this.assetsPath + 'plane/'); //New Sfx instance
 
+<<<<<<< HEAD
         this.sfx.load('levelup')
+=======
+        //From assets plane folder
+>>>>>>> c3205aeee75e3379ccfb63be4310b16c0585ce22
         this.sfx.load('explosion');
         this.sfx.load('engine',true,1);
         this.sfx.load('gliss');
@@ -276,9 +297,10 @@ class Game{
     gameOver(){
         this.active = false;
 
-        const gameover = document.getElementById('gameover');
-        const btn = document.getElementById('playBtn');
+        const gameover = document.getElementById('gameover'); //set id to variable
+        const btn = document.getElementById('playBtn'); //set id to variable
 
+        //Set diplay stylr to block, making them visible.
         gameover.style.display = 'block';
         btn.style.display = 'block';
 
@@ -289,7 +311,7 @@ class Game{
         
         this.plane.visible = false;
         this.sfx.stopAll();
-        this.sfx.play('gameover');
+        this.sfx.play('gameover'); //Play gameover sound
         
 
         checkHighScore(this.score);
@@ -336,6 +358,7 @@ class Game{
     }
 
     incScore(){
+<<<<<<< HEAD
         this.score++;
         const elm = document.getElementById('score');
         elm.innerHTML = this.score;
@@ -346,20 +369,27 @@ class Game{
         if (this.score==30){
             setTimeout(this.level3.bind(this), 500);
         }
+=======
+        this.score++; 
 
-        this.sfx.play('gliss');
+        const elm = document.getElementById('score'); //set id to variable
+
+        elm.innerHTML = this.score; //Display on screen
+>>>>>>> c3205aeee75e3379ccfb63be4310b16c0585ce22
+
+        this.sfx.play('gliss'); //Play gliss sound 
     }
 
     decLives(){
         this.lives--;
 
-        const elm = document.getElementById('lives');
+        const elm = document.getElementById('lives'); //set id to variable
 
-        elm.innerHTML = this.lives;
+        elm.innerHTML = this.lives; //Display on screen
 
-        if (this.lives==0) setTimeout(this.gameOver.bind(this), 1200);
+        if (this.lives==0) setTimeout(this.gameOver.bind(this), 1200); //If lives == 0, call the gameOver method.
 
-        this.sfx.play('explosion');
+        this.sfx.play('explosion'); //Play explosion
     }
 
     updateCamera(){
@@ -374,7 +404,7 @@ class Game{
     render() {
         //Check if we're still loading
 	    if (this.loading){
-	    //If we are still loading, Check the ready flag of the plane.
+	    //If we are still loading, Check the ready flag of the plane and obstacles.
             if (this.plane.ready && this.obstacles.ready){
                 this.loading = false; //If the plane is ready set loading to false
                 this.loadingBar.visible = false; //Hide the loading bar
@@ -388,6 +418,7 @@ class Game{
 
         this.plane.update(time);
 	
+        //If game is active, call the update methos of the obtacles
         if (this.active){
             this.obstacles.update(this.plane.position, dt);
         }
