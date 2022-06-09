@@ -57,7 +57,6 @@ class Game{
         
         this.spaceKey = false; //All event-listeners will handle spaceKey class property, default to false
 
-<<<<<<< HEAD
         const btn = document.getElementById('playBtn');
         btn.addEventListener('click', this.startGame.bind(this));
 
@@ -67,11 +66,6 @@ class Game{
         const levelThreeBtn = document.getElementById('levelThreeBtn');
         levelThreeBtn.addEventListener('click', this.levelThree.bind(this));
     }
-=======
-        const btn = document.getElementById('playBtn'); //Pass id to button
-        btn.addEventListener('click', this.startGame.bind(this)); //button event-listener
-	}
->>>>>>> c3205aeee75e3379ccfb63be4310b16c0585ce22
 	
     levelTwo(){
         const level2 = document.getElementById('level2');
@@ -162,14 +156,8 @@ class Game{
         this.obstacles.reset();
 
         this.active = true;
-<<<<<<< HEAD
         this.sfx.play('engine');
         this.loadSkybox();
-=======
-
-        this.sfx.play('engine'); //Play engine sound
->>>>>>> c3205aeee75e3379ccfb63be4310b16c0585ce22
-
     }
 
     resize(){
@@ -237,12 +225,8 @@ class Game{
 
     loadSFX(){
         this.sfx = new SFX(this.camera, this.assetsPath + 'plane/'); //New Sfx instance
-
-<<<<<<< HEAD
-        this.sfx.load('levelup')
-=======
         //From assets plane folder
->>>>>>> c3205aeee75e3379ccfb63be4310b16c0585ce22
+        this.sfx.load('levelup');
         this.sfx.load('explosion');
         this.sfx.load('engine',true,1);
         this.sfx.load('gliss');
@@ -358,10 +342,8 @@ class Game{
     }
 
     incScore(){
-<<<<<<< HEAD
         this.score++;
-        const elm = document.getElementById('score');
-        elm.innerHTML = this.score;
+    
         if (this.score==10){
             setTimeout(this.level2.bind(this), 500);
         }
@@ -369,13 +351,10 @@ class Game{
         if (this.score==30){
             setTimeout(this.level3.bind(this), 500);
         }
-=======
-        this.score++; 
 
         const elm = document.getElementById('score'); //set id to variable
 
         elm.innerHTML = this.score; //Display on screen
->>>>>>> c3205aeee75e3379ccfb63be4310b16c0585ce22
 
         this.sfx.play('gliss'); //Play gliss sound 
     }
