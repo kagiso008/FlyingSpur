@@ -172,6 +172,9 @@ class Game{
             case 38:
                 this.spaceKey = true; 
                 break;
+	    case 32:
+                this.spaceKey = true; 
+                break;
         }
     }
     
@@ -179,6 +182,9 @@ class Game{
     keyUp(evt){
         switch(evt.keyCode){
             case 38:
+                this.spaceKey = false;
+                break;
+	    case 32:
                 this.spaceKey = false;
                 break;
         }
