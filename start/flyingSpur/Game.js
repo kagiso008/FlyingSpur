@@ -177,6 +177,9 @@ class Game{
             case 38:
                 this.spaceKey = true; 
                 break;
+	    case 32:
+                this.spaceKey = true; 
+                break;
         }
     }
     
@@ -184,6 +187,9 @@ class Game{
     keyUp(evt){
         switch(evt.keyCode){
             case 38:
+                this.spaceKey = false;
+                break;
+	    case 32:
                 this.spaceKey = false;
                 break;
         }
@@ -272,12 +278,12 @@ class Game{
         this.scene.background = new THREE.CubeTextureLoader()
 	        .setPath( `${this.assetsPath}/plane/paintedsky/` )
             .load( [
-                'gal_nx.jpg', //positive x-axis
-                'gal_px.jpg', //-x
-                'gal_py.jpg', //+y
-                'ga_ny.jpg', //-y
-                'gal_pz.jpg', //+z
-                'gal_nz.jpg' //-z
+                'posx.jpg', //positive x-axis
+                'negx.jpg', //-x
+                'posy.jpg', //+y
+                'negy.jpg', //-y
+                'posz.jpg', //+z
+                'negz.jpg' //-z
             ], () => {
                 this.renderer.setAnimationLoop(this.render.bind(this));
             } );
