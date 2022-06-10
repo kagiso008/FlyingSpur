@@ -57,6 +57,7 @@ class Game{
         
         this.spaceKey = false; //All event-listeners will handle spaceKey class property, default to false
 
+        //bindind levels with their html bodies
         const btn = document.getElementById('playBtn');
         btn.addEventListener('click', this.startGame.bind(this));
 
@@ -74,6 +75,7 @@ class Game{
         level2.style.display = 'none';
         levelTwobtn.style.display = 'none';
 
+        //show points and lives 
         let elm = document.getElementById('score');
         elm.innerHTML = this.score;
         
@@ -88,6 +90,7 @@ class Game{
         scoreImg.style.visibility = 'visible';
         livesImg.style.visibility = 'visible';
 
+        //reset plane
         this.plane.reset();
         this.obstacles.reset();
 
@@ -102,6 +105,7 @@ class Game{
         level3.style.display = 'none';
         levelThreebtn.style.display = 'none';
 
+        //show lives and points with their images
         let elm = document.getElementById('score');
         elm.innerHTML = this.score;
         
@@ -116,6 +120,7 @@ class Game{
         scoreImg.style.visibility = 'visible';
         livesImg.style.visibility = 'visible';
 
+        //reset plane
         this.plane.reset();
         this.obstacles.reset();
 
@@ -407,6 +412,7 @@ class Game{
     }
 }
 
+//funtion to get highscores from local storage
 function showHighScores() {
     const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
     const highScoreList = document.getElementById('highScores');
@@ -416,6 +422,7 @@ function showHighScores() {
     .join(''); 
 }
   
+//function to check highscores from local storage
 function checkHighScore(score) {
     const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
     const lowestScore = highScores[NO_OF_HIGH_SCORES - 1]?.score ?? 0;
@@ -428,6 +435,7 @@ function checkHighScore(score) {
     showHighScores();
 }
   
+//svae high scores to local storage
 function saveHighScore(score, highScores) {
     highScores.push(score);
     highScores.sort((a, b) => b.score - a.score);
