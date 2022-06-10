@@ -244,6 +244,7 @@ class Game{
         this.sfx.load('gameover');
     }
 
+    //level one background image
     loadSkybox(){
         this.scene.background = new THREE.CubeTextureLoader()
 	        .setPath( `${this.assetsPath}/plane/paintedsky/` )
@@ -259,6 +260,7 @@ class Game{
             } );
     }
 
+    //level two backgroud image
     loadSkybox2(){
         this.scene.background = new THREE.CubeTextureLoader()
 	        .setPath( `${this.assetsPath}/plane/paintedsky/` )
@@ -274,6 +276,7 @@ class Game{
             } );
     }
 
+    //level 3 background image 
     loadSkybox3(){
         this.scene.background = new THREE.CubeTextureLoader()
 	        .setPath( `${this.assetsPath}/plane/paintedsky/` )
@@ -312,6 +315,7 @@ class Game{
         checkHighScore(this.score);
     }
 
+    //pause the game and show level 2 information 
     level2(){
         this.active = false;
 
@@ -332,6 +336,7 @@ class Game{
         this.sfx.play('levelup');
     }
 
+    //pause the game and show level 3 information
     level3(){
         this.active = false;
 
@@ -355,10 +360,12 @@ class Game{
     incScore(){
         this.score++;
     
+        //get to level two with 10 points
         if (this.score==10){
             setTimeout(this.level2.bind(this), 500);
         }
 
+        //get to level three with 30 points 
         if (this.score==30){
             setTimeout(this.level3.bind(this), 500);
         }
